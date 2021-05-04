@@ -8,7 +8,6 @@ public class LZencode {
 	int _byte;
 	BufferedInputStream buffis;
 	
-	
 	public static void main(String[] args) throws IOException {
 		LZencode encode = new LZencode();
 		encode.run();
@@ -19,37 +18,46 @@ public class LZencode {
 		_byte = buffis.read();
 		while(_byte != -1) {
 			searchNodeArray(dictionary, _byte);
-			//go through the dict, check if a letter exists
-			//if it doesn't create a node 
-			//if it does go to the node array it links to.
-			//repeat until node is found.
 		}
-		System.out.println("-------");
+		/*System.out.println("-------");
 		for(int j = 0; j < dictionary.nodes.length; j++) {
 			System.out.println((char)dictionary.nodes[j].getValue());
 		}
-		System.out.println("-------");
+		System.out.println("-------");*/
 	}
 	
 	public void searchNodeArray(NodeArray na, int b) throws IOException {
 		for(int i = 0; i < na.nodes.length; i ++) {
 			if(na.nodes[i].getValue() == _byte) {
-				_byte = buffis.read();
 				if (_byte == -1) {
 					return;
 				}
+				/*if (na.nodes[i].getNextNodeArray() == null) {
+					_byte = buffis.read();
+					if(_byte == -1) {
+						return;
+					}
+					counter++;
+					NodeArray newNA = new NodeArray(counter);
+					na.nodes[i].setNextNodeArray(newNA);
+					Node n = new Node(_byte);
+					newNA.add(n);
+					System.out.println(newNA._number + " " + _byte);
+					_byte = buffis.read();
+					return;
+				}*/
+				_byte = buffis.read();
 				searchNodeArray(na.nodes[i].getNextNodeArray(), _byte);
 				return;
-				//get next byte and try again
 			}
 		}
-		NodeArray newNA = new NodeArray(counter);
-		Node n = new Node((char)b);
-		na.add(n);
-		n.setNextNodeArray(newNA);
-		System.out.println(counter + " " + (char)b); 
+		Node n = new Node(b);
 		counter++;
-		_byte = (char)buffis.read();
+		NodeArray newNA = new NodeArray(counter);
+		n.setNextNodeArray(newNA);
+		na.add(n);
+		System.out.println(na._number + " " + /*(char)*/b);
+		_byte = buffis.read();
 		return;
 	}
 }

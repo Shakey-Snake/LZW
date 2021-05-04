@@ -1,10 +1,10 @@
 
 public class Node {
-	private char value;
+	private int value;
 	private Node nextNode;
 	private NodeArray nextNodeArray;
 	
-	public Node(char val) {
+	public Node(int val) {
 		value = val;
 	}
 	
