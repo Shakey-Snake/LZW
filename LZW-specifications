@@ -1,0 +1,5 @@
+Your encoder takes its input as a stream of hexadecimal digits (as characters) from standard input, and uses the LZW algorithm to output phrase numbers, one phrase number per line.
+Given the output of your encoder as input, the output of your decoder should exactly match the input to the encoder (i.e. this is the complement operation to your encoder).
+Given the output of your encoder as input, the output of the bit-packer is a stream of bytes encoding the input in as few bits as needed (i.e. log p bits per phrase number when there are p patterns in the dictionary).
+Given the output of your bit-packer as input, the output of your bit-unpacker should exactly match the input to the bit-packer (i.e. this is the complement operation to your bit-packer).
+The encoder must utilise a multiway trie (not hashing) for the dictionary.
